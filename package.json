@@ -1,0 +1,43 @@
+{
+  "name": "whisker-edge",
+  "version": "0.1.0",
+  "description": "A calm desktop-overlay cat collector for Windows.",
+  "main": "./out/main/index.js",
+  "author": "Whisker Edge",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/run.mjs electron-vite dev",
+    "build": "electron-vite build",
+    "start": "node scripts/run.mjs electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "icons": "node scripts/gen-icons.mjs",
+    "preview:anchors": "node scripts/preview-anchors.mjs",
+    "package": "node scripts/run.mjs npm run build && electron-builder --dir",
+    "dist": "node scripts/run.mjs npm run build && electron-builder --win nsis"
+  },
+  "dependencies": {
+    "howler": "^2.2.4",
+    "pixi.js": "^8.22.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.12",
+    "@types/node": "^24.0.0",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^5.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.3"
+  },
+  "build": {
+    "appId": "com.whiskeredge.app",
+    "productName": "Whisker Edge",
+    "directories": { "output": "release" },
+    "files": ["out/**/*", "assets/**/*", "resources/**/*"],
+    "win": { "target": "nsis", "artifactName": "${productName}-${version}.${ext}" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+  }
+}
